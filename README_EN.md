@@ -127,8 +127,8 @@ kubectl.exe config use-context kind-higress
 #### step 3. install istio & higress
 
 ```bash
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
-helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
+helm install --create-namespace -n istio-system istio oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
+helm install --create-namespace -n higress-system higress oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
 ```
 
 #### step 4. create the ingress and test it
@@ -167,8 +167,7 @@ kubectl delete ns higress-system
 select higress istio:
 
 ```bash
-kubectl create ns istio-system
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+helm install --create-namespace -n istio-system istio oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
 ```
 
 or select official istio (lose some abilities, such as using annotation to limit request rate):
@@ -178,8 +177,7 @@ https://istio.io/latest/docs/setup/install
 #### step 2. install higress
 
 ```bash
-kubectl create ns higress-system
-helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress 
+helm install --create-namespace -n higress-system higress oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress 
 ```
 
 #### step 3. create the ingress and test it

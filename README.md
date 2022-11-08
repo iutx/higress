@@ -151,10 +151,8 @@ kubectl.exe config use-context kind-higress
 #### 第三步、 安装 istio & higress
 
 ```bash
-kubectl create ns istio-system
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
-kubectl create ns higress-system
-helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
+helm install --create-namespace -n istio-system istio oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio-local
+helm install --create-namespace -n higress-system higress oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress-local
 ```
 
 #### 第四步、 创建 Ingress 资源并测试
@@ -193,8 +191,7 @@ kubectl delete ns higress-system
 可以选择安装 higress 发行的 istio 版本:
 
 ```bash
-kubectl create ns istio-system
-helm install istio -n istio-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
+helm install --create-namespace -n istio-system istio oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/istio
 ```
 
 或者选择安装官方 istio 版本 (将失去部分能力，例如通过 Ingress 注解实现限流的功能):
@@ -204,8 +201,7 @@ https://istio.io/latest/docs/setup/install
 #### 第二步、 安装 higress
 
 ```bash
-kubectl create ns higress-system
-helm install higress -n higress-system oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress 
+helm install --create-namespace -n higress-system higress oci://higress-registry.cn-hangzhou.cr.aliyuncs.com/charts/higress 
 ```
 
 #### 第三步、 创建 Ingress 资源并测试
