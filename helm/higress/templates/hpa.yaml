@@ -1,5 +1,5 @@
 {{- if .Values.gateway.autoscaling.enabled }}
-apiVersion: autoscaling/v2beta2
+apiVersion: {{ include "capabilities.autoscaling.apiVersion" . }}
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "gateway.name" . }}

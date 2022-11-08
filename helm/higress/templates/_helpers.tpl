@@ -1,3 +1,22 @@
+{{/*
+Return the target Kubernetes version
+*/}}
+{{- define "capabilities.kubeVersion" -}}
+{{- default .Capabilities.KubeVersion.Version .Values.kubeVersionOverride -}}
+{{- end -}}
+
+{{/*
+Return the appropriate apiVersion for autoscaling.
+*/}}
+{{- define "capabilities.autoscaling.apiVersion" -}}
+{{- if semverCompare ">=1.23-0" (include "capabilities.kubeVersion" .) }}
+{{- print "autoscaling/v2" -}}
+{{- else -}}
+{{- print "autoscaling/v2beta2" -}}
+{{- end -}}
+{{- end -}}
+
+
 {{- define "gateway.name" -}}
 {{- .Values.gateway.name | default "higress-gateway" -}}
 {{- end }}
